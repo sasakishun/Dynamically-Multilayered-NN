@@ -202,7 +202,6 @@ if __name__ == '__main__':
     x_train = x_train.astype('float32')
     x_test = x_test.astype('float32')
 
-
     y_train = keras.utils.to_categorical(y_train, 10)
     y_test = keras.utils.to_categorical(y_test, 10)
 
