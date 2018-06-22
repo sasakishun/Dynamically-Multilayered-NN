@@ -31,6 +31,7 @@ class cifar10vgg:
         model = Sequential()
         weight_decay = self.weight_decay
 
+        #1
         model.add(Conv2D(64, (3, 3), padding='same',
                          input_shape=self.x_shape, kernel_regularizer=regularizers.l2(weight_decay)))
         model.add(Activation('relu'))
@@ -43,6 +44,7 @@ class cifar10vgg:
 
         model.add(MaxPooling2D(pool_size=(2, 2)))
 
+        #2
         model.add(Conv2D(128, (3, 3), padding='same', kernel_regularizer=regularizers.l2(weight_decay)))
         model.add(Activation('relu'))
         model.add(BatchNormalization())
@@ -54,6 +56,7 @@ class cifar10vgg:
 
         model.add(MaxPooling2D(pool_size=(2, 2)))
 
+        #3
         model.add(Conv2D(256, (3, 3), padding='same', kernel_regularizer=regularizers.l2(weight_decay)))
         model.add(Activation('relu'))
         model.add(BatchNormalization())
@@ -70,6 +73,7 @@ class cifar10vgg:
 
         model.add(MaxPooling2D(pool_size=(2, 2)))
 
+        #4
         model.add(Conv2D(512, (3, 3), padding='same', kernel_regularizer=regularizers.l2(weight_decay)))
         model.add(Activation('relu'))
         model.add(BatchNormalization())
@@ -86,6 +90,7 @@ class cifar10vgg:
 
         model.add(MaxPooling2D(pool_size=(2, 2)))
 
+        #5
         model.add(Conv2D(512, (3, 3), padding='same', kernel_regularizer=regularizers.l2(weight_decay)))
         model.add(Activation('relu'))
         model.add(BatchNormalization())
@@ -103,6 +108,7 @@ class cifar10vgg:
         model.add(MaxPooling2D(pool_size=(2, 2)))
         model.add(Dropout(0.5))
 
+        #full_connect
         model.add(Flatten())
         model.add(Dense(512, kernel_regularizer=regularizers.l2(weight_decay)))
         model.add(Activation('relu'))
