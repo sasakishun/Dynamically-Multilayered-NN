@@ -90,27 +90,9 @@ class cifar10vgg:
 
         model.add(MaxPooling2D(pool_size=(2, 2)))
 
-        #5
-        model.add(Conv2D(512, (3, 3), padding='same', kernel_regularizer=regularizers.l2(weight_decay)))
-        model.add(Activation('relu'))
-        model.add(BatchNormalization())
-        model.add(Dropout(0.4))
-
-        model.add(Conv2D(512, (3, 3), padding='same', kernel_regularizer=regularizers.l2(weight_decay)))
-        model.add(Activation('relu'))
-        model.add(BatchNormalization())
-        model.add(Dropout(0.4))
-
-        model.add(Conv2D(512, (3, 3), padding='same', kernel_regularizer=regularizers.l2(weight_decay)))
-        model.add(Activation('relu'))
-        model.add(BatchNormalization())
-
-        model.add(MaxPooling2D(pool_size=(2, 2)))
-        model.add(Dropout(0.5))
-
         #full_connect
         model.add(Flatten())
-        model.add(Dense(512, kernel_regularizer=regularizers.l2(weight_decay)))
+        model.add(Dense(2*2*512, kernel_regularizer=regularizers.l2(weight_decay)))
         model.add(Activation('relu'))
         model.add(BatchNormalization())
 
@@ -201,25 +183,3 @@ class cifar10vgg:
                                           validation_data=(x_test, y_test), callbacks=[reduce_lr, es_cb], verbose=2)
         model.save_weights('cifar10vgg.h5')
         return model
-
-
-if __name__ == '__main__':
-    (x_train, y_train), (x_test, y_test) = cifar10.load_data()
-    x_train = x_train.astype('float32')
-    x_test = x_test.astype('float32')
-
-    y_train = keras.utils.to_categorical(y_train, 10)
-    y_test = keras.utils.to_categorical(y_test, 10)
-
-    model = cifar10vgg()
-
-    predicted_x = model.predict(x_test)
-    residuals = np.argmax(predicted_x, 1) != np.argmax(y_test, 1)
-
-    loss = sum(residuals) / len(residuals)
-    print("the validation 0/1 loss is: ", loss)
-
-    sgd = optimizers.SGD()
-    model.model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
-
-    print(model.evaluate(x_test, y_test, batch_size=128))
