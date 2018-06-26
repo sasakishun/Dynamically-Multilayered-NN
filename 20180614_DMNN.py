@@ -13,6 +13,12 @@ from keras import regularizers
 from keras.callbacks import EarlyStopping, TensorBoard, ModelCheckpoint
 from keras.models import load_model
 
+first = __import__("1st_block")
+second = __import__("2nd_block")
+third = __import__("3rd_block")
+forth = __import__("4th_block")
+fifth = __import__("5th_block")
+
 class cifar10vgg:
     def __init__(self, train=True):
         self.num_classes = 10
