@@ -1,3 +1,6 @@
+# I use cifar-vgg model.
+I dynamically multiilayer Neural Networks, in this method shallow networks be multilayered from 5th layer model to Vgg-16.
+
 # cifar-vgg
 This is a Keras model based on VGG16 architecture for CIFAR-10 and CIFAR-100. it can be used either with pretrained weights file or trained from scratch.
 
